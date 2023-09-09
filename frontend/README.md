@@ -1,8 +1,24 @@
-# React + Vite
+# InventoryX Frontend
+Interfaz web de InventoryX 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Technologies
+- React 18+
 
-Currently, two official plugins are available:
+## Setup
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
--Code Owners [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Prerequisites
+
+- node 18.17.X
+- npm 9.6.X
+
+### Run
+
+1. Install dependencies:
+```
+npm install
+```
+
+2. Run development server:
+```
+npm run dev
+```
