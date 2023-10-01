@@ -1,2 +1,9 @@
+import user from "./user/index.js";
 
-// TODO: export databases to use
+const databases = {
+	user
+}
+
+export default {
+	databases
+}
