@@ -22,9 +22,10 @@ export const permissionSchema = new Schema({
 export const userSchema = new Schema({
 	name: { type: String, required: true },
 	last_name: { type: String, required: true },
-	username: String,
+	username: { type: String, required: true, unique: true },
 	password: String,
-	email: { type: String, required: true },
+	salt: String,
+	email: { type: String, required: true, unique: true },
 	address: { type: String, required: true },
 	phone: String,
 	is_admin: Boolean,
