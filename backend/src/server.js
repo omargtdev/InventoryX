@@ -3,6 +3,7 @@ import bodyParser from "body-parser";
 
 import { SERVER_HOST, SERVER_PORT } from "./config/env.js";
 import router from "./routes/index.js";
+import utilMiddleware from "./middlewares/util.middleware.js";
 
 const server = express();
 
@@ -12,6 +13,7 @@ server.set('HOST', SERVER_HOST);
 
 // Middlewares
 server.use(bodyParser.json());
+server.use(utilMiddleware.cleanBodyStringsExcept(["password"]))
 
 // Router
 server.use(router);
