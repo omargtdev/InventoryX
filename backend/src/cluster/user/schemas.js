@@ -28,7 +28,7 @@ export const userSchema = new Schema({
 	email: { type: String, required: true, unique: true },
 	address: { type: String, required: true },
 	phone: String,
-	is_admin: Boolean,
+	is_admin: { type: Boolean, default: false },
 	photo_url: String,
 	permissions: [String],
 	created_at: { type: Date, default: Date.now },
