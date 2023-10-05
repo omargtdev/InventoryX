@@ -1,7 +1,7 @@
 import statusCodes from "../config/status-codes.js";
 import encryptService from "../services/encrypt.service.js";
 import jwtService from "../services/jwt.service.js";
-import userService from "../services/user.service.js";
+import userService, { MappingTypes } from "../services/user.service.js";
 
 const messages =  {
 	MISSING_FIELDS: "Necesita proveer sus credenciales.",
@@ -14,11 +14,11 @@ const getUserToken = async (req, res) => {
 		if(!username || !password)
 			return res.status(statusCodes.BAD_REQUEST).json({ message: messages.MISSING_FIELDS });
 
-		const user = await userService.findUserByUsername(username);
+		const user = await userService.findUserByUsername(username, MappingTypes.FULL);
 		if(!user)
 			return res.status(statusCodes.UNAUTHORIZED).json({ message: messages.INVALID_CREDENTIALS });
 
-		const { salt, password: userPassword, id, name} = user;
+		const { salt, password: userPassword, id, name } = user;
 		const isThePassword = encryptService.comparePassword(password, { salt, passwordHashed: userPassword });
 		if(!isThePassword) 
 			return res.status(statusCodes.UNAUTHORIZED).json({ message: messages.INVALID_CREDENTIALS });
@@ -31,8 +31,15 @@ const getUserToken = async (req, res) => {
 	}
 }
 
-const getProfile = (req, res) => {
-
+const getProfile = async (req, res) => {
+	try {
+		const { userId } = req;
+		const user = await userService.findUserById(userId);
+		return res.status(statusCodes.OK).json({ ...user });
+	} catch (error) {
+		console.log("ERROR GETTING PROFILE ---->", error);
+		res.status(statusCodes.INTERNAL_SERVER_ERROR).json({ message: error.message });
+	}
 }
 
 const updateProfile = (req, res) => {

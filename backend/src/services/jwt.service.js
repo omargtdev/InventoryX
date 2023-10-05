@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 
 import { TOKEN_ALGORITHM, TOKEN_EXPIRY_TIME, TOKEN_SECRET } from "../config/env.js";
+import userService from "./user.service.js";
 
 const tokenDefaultOptions = {
 	algorithm: TOKEN_ALGORITHM,
@@ -34,6 +35,7 @@ const tokenErrorTypes = {
 
 const tokenErrorMessages = {
 	EMPTY: "Invalid token.",
+	INVALID_TOKEN: "Invalid token.",
 	MALFORMED: "Invalid format token.",
 	EXPIRED: "Token expired. Generate another.",
 	INVALID_SIGNATURE: "Invalid token.",
@@ -48,7 +50,7 @@ const validateToken = (token) => new Promise((resolve, reject) => {
 		complete: false
 	};
 	
-	jwt.verify(token, TOKEN_SECRET, options, (err, payload) => {
+	jwt.verify(token, TOKEN_SECRET, options, async (err, payload) => {
 		if(err){
 			console.log(err);
 			const errorType  = tokenErrorTypes[err.message];
@@ -56,9 +58,12 @@ const validateToken = (token) => new Promise((resolve, reject) => {
 			return reject(errorMessage);
 		}
 		
-		// TODO: Validate exist user (subject)
-		console.log(payload);
-		resolve();
+		const { sub: userId } = payload;
+		const userFounded = await userService.findUserById(userId);
+		if(!userFounded)
+			reject(tokenErrorMessages.INVALID_TOKEN);
+
+		resolve(userId);
 	})
 });
 
