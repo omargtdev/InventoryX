@@ -11,6 +11,10 @@ const messages = {
 	INVALID_SCHEME: "Invalid authorization scheme."
 }
 
+/**
+ * Validate JWT in request and add the userId from request
+ * adding "userId" property to request.
+ */
 const validateJwt = async (req, res, next) => {
 	if(PATHS_TO_IGNORE.includes(req.url))
 		return next();
@@ -25,14 +29,12 @@ const validateJwt = async (req, res, next) => {
 		return res.status(statusCodes.UNAUTHORIZED).json({ message: messages.INVALID_SCHEME })
 
 	try {
-		await jwtService.validateToken(token);
+		const userId = await jwtService.validateToken(token);
+		req.userId = userId;
 	} catch (errorMessage) {
-		return res.status(statusCodes.UNAUTHORIZED).json({ message: errorMessage });
-		
+		return res.status(statusCodes.UNAUTHORIZED).json({ message: errorMessage });	
 	}
 	
-
-
 	next();
 }
 
