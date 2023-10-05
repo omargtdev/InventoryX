@@ -1,1 +1,3 @@
-console.log("Started!");
+import server from "./server.js";
+
+server.start();
