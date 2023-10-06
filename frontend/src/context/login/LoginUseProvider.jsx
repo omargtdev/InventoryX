@@ -2,16 +2,16 @@ import { useState } from "react";
 import { LoginUseContext } from "./LoginUseContext";
 
 export const LoginUseProvider = ({ children }) => {
-	const [isSignup, setIsSignup] = useState(false);
+	const [isSignIn, setIsSignIn] = useState(false);
 
 	const toggleForm = () => {
-		setIsSignup(!isSignup);
+		setIsSignIn(!isSignIn);
 	};
 
 	return (
 		<LoginUseContext.Provider
 			value={{
-				isSignup,
+				isSignIn,
 				toggleForm,
 			}}
 		>
