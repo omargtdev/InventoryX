@@ -20,7 +20,7 @@ const getUserToken = async (req, res) => {
 
 		const { salt, password: userPassword, id, name } = user;
 		const isThePassword = encryptService.comparePassword(password, { salt, passwordHashed: userPassword });
-		if(!isThePassword) 
+		if(!isThePassword)
 			return res.status(statusCodes.UNAUTHORIZED).json({ message: messages.INVALID_CREDENTIALS });
 
 		const token = await jwtService.generateToken(id, name);
