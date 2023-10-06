@@ -13,8 +13,8 @@ const Login = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		const { ok, data, erroMessage } = await authService.login(loginUsername, password);
-		if (ok) {
+		const { isOk, data, erroMessage } = await authService.login(loginUsername, password);
+		if (isOk) {
 			alert("Inicio de sesión exitoso");
 			console.log(data);
 			return;
@@ -26,29 +26,7 @@ const Login = () => {
 	const handleResetPassword = async (e) => {
 		e.preventDefault();
 
-		try {
-			const response = await fetch("/api/reset-password", {
-				// Reemplaza con tu URL de la API del servidor
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({ username: resetUsername }), // Envía nombre de usuario al servidor
-			});
-
-			if (response.ok) {
-				// El servidor procesó la solicitud con éxito, muestra un mensaje de éxito o redirige a una página de confirmación
-				setResetMessage(
-					"Se ha enviado un enlace de restablecimiento de contraseña por correo electrónico."
-				);
-			} else {
-				const data = await response.json();
-				// El servidor respondió con un error, muestra el mensaje de error
-				setErrorMessage(data.message);
-			}
-		} catch (error) {
-			console.error("Error al restablecer la contraseña:", error);
-		}
+		// TODO: Implement the reset logic
 	};
 
 	return (

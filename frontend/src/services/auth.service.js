@@ -10,7 +10,7 @@ const BASE_URL = "http://localhost:4500/auth";
  * errorMessage: string
  */
 
-const baseModel = { ok: false, data: null, erroMessage: null };
+const baseModel = { isOk: false, data: null, erroMessage: null };
 
 
 const login = async (username, password) => {
@@ -20,7 +20,7 @@ const login = async (username, password) => {
 		if(!response.ok)
 			return { ...baseModel, erroMessage: data.message };
 
-		return { ...baseModel, ok: response.ok, data }
+		return { ...baseModel, isOk: response.ok, data }
 	} catch (error) {
 		throw { ...baseModel, errorMessage: "Ups! Ocurrió un error al tratar de autenticarse" };
 	}
