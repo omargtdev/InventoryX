@@ -13,6 +13,8 @@ export default {
 			backgroundImage: {
 				overlay:
 					"linear-gradient(180deg, rgba(185,185,185,0.20772058823529416) 10%, rgba(0,112,164,1) 100%);",
+				"overlay-side":
+					"linear-gradient(360deg, rgba(185,185,185,0.20772058823529416) 5%, rgba(0,112,164,1) 100%);",
 			},
 		},
 	},
