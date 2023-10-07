@@ -3,7 +3,7 @@ import { BiChevronLeft } from "react-icons/bi";
 import SidebarData from "./SidebarData";
 import UserProfile from "./UserProfile";
 
-const Side = () => {
+const Sidebar = () => {
 	const [toggle, setToggle] = useState(false);
 
 	return (
@@ -29,4 +29,5 @@ const Side = () => {
 		</div>
 	);
 };
-export default Side;
+
+export default Sidebar;

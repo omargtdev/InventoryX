@@ -17,7 +17,7 @@ const UserProfile = ({ toggle }) => {
 				/>
 			</div>
 			<div className={toggle ? "opacity-0 delay-200" : "delay-200"}>
-				<h3 className="text-xl "></h3>
+				<h3 className="text-xl ">Omar Gutierrez</h3>
 			</div>
 		</div>
 	);
