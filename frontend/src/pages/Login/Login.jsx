@@ -13,7 +13,10 @@ const Login = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		const { isOk, data, erroMessage } = await authService.login(loginUsername, password);
+		const { isOk, data, erroMessage } = await authService.login(
+			loginUsername,
+			password
+		);
 		if (isOk) {
 			alert("Inicio de sesión exitoso");
 			console.log(data);
@@ -48,6 +51,7 @@ const Login = () => {
 							placeholder="Usuario"
 							value={resetUsername}
 							onChange={(e) => setResetUsername(e.target.value)}
+							required
 						/>
 						<BtnLogin btnName={"Enviar"} bgButton={true} />
 					</form>
@@ -67,6 +71,7 @@ const Login = () => {
 							value={loginUsername}
 							placeholder="Usuario"
 							onChange={(e) => setLoginUsername(e.target.value)}
+							required
 						/>
 						<input
 							className="bg-[#eee] border-none px-3 py-4 w-full rounded-3xl outline-none"
@@ -74,6 +79,7 @@ const Login = () => {
 							value={password}
 							placeholder="Contraseña"
 							onChange={(e) => setPassword(e.target.value)}
+							required
 						/>
 						<BtnLogin btnName={"Continuar"} bgButton={true} />
 					</form>

@@ -6,7 +6,6 @@ import Sidebar from "../../components/Side/Side";
 const Dashboard = () => {
 	return (
 		<>
-			<h1>Dashboard</h1>
 			<Sidebar />
 
 			<Outlet />

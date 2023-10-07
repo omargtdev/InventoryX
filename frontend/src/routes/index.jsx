@@ -12,8 +12,7 @@ export const router = createBrowserRouter([
 		path: "/login",
 		element: (
 			<LoginUseProvider>
-				{" "}
-				<Login />{" "}
+				<Login />
 			</LoginUseProvider>
 		),
 	},
@@ -21,8 +20,7 @@ export const router = createBrowserRouter([
 		path: "/",
 		element: (
 			<AuthContextProvider>
-				{" "}
-				<Dashboard />{" "}
+				<Dashboard />
 			</AuthContextProvider>
 		),
 		children: [
