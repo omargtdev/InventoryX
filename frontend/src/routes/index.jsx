@@ -1,28 +1,23 @@
 import { createBrowserRouter } from "react-router-dom";
 
-import Login from "../pages/Login/Login";
+import Login from "../pages/Login";
 import Dashboard from "../pages/Dashboard";
 import Welcome from "../pages/Welcome";
 
 import { LoginUseProvider } from "../context/login/LoginUseProvider";
-import { AuthContextProvider } from "../context/auth/AuthContextProvider";
 
 export const router = createBrowserRouter([
 	{
 		path: "/login",
 		element: (
-			<LoginUseProvider>
-				<Login />
-			</LoginUseProvider>
+				<LoginUseProvider>
+						<Login />
+				</LoginUseProvider>
 		),
 	},
 	{
 		path: "/",
-		element: (
-			<AuthContextProvider>
-				<Dashboard />
-			</AuthContextProvider>
-		),
+		element: <Dashboard />,
 		children: [
 			{
 				index: true,

@@ -1,9 +1,18 @@
-// TODO: Sidebar and navbar here
+import { Outlet, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
-import { Outlet } from "react-router-dom";
-import Sidebar from "../../components/Side/Side";
+import Sidebar from "../../components/Sidebar";
+import { useIsUserLoggedIn } from "../../hooks/useIsUserLoggedIn";
 
 const Dashboard = () => {
+	const isUserLoggedIn = useIsUserLoggedIn();
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		if(!isUserLoggedIn)
+			navigate("/login");
+	}, [isUserLoggedIn])
+
 	return (
 		<>
 			<Sidebar />
