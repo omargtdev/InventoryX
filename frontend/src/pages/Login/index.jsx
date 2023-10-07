@@ -1,11 +1,24 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import authService from "../../services/auth.service";
 
 import BtnLogin from "../../components/BtnLogin";
 import { LoginUseContext } from "../../context/login/LoginUseContext";
-import authService from "../../services/auth.service";
+import { useIsUserLoggedIn } from "../../hooks/useIsUserLoggedIn";
+import { useUserStore } from "../../store/useUserStore";
 
 const Login = () => {
-	const { isSignIn } = useContext(LoginUseContext);
+	const isUserLoggedIn = useIsUserLoggedIn();
+	const setUserToken = useUserStore(state => state.setToken);
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		if(isUserLoggedIn)
+			navigate("/");
+	}, [isUserLoggedIn])
+
+	const { isSignIn: isSignInForm } = useContext(LoginUseContext);
 	const [resetUsername, setResetUsername] = useState("");
 	const [loginUsername, setLoginUsername] = useState("");
 	const [password, setPassword] = useState("");
@@ -13,30 +26,30 @@ const Login = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		const { isOk, data, erroMessage } = await authService.login(
+		const { isOk, data, errorMessage } = await authService.login(
 			loginUsername,
 			password
 		);
 		if (isOk) {
-			alert("Inicio de sesión exitoso");
-			console.log(data);
+			setUserToken(data.token);
 			return;
 		}
 
-		alert(erroMessage);
+		alert(errorMessage);
 	};
 
 	const handleResetPassword = async (e) => {
 		e.preventDefault();
 
 		// TODO: Implement the reset logic
+		alert(`Se envio un email a tu correo registrado con el nombre de usuario ${resetUsername}`)
 	};
 
 	return (
 		<section className="bg-[#f6f5f7] flex justify-center items-center flex-col h-screen font-sans-montserrat p-6">
 			<div
 				className={` bg-[#fff] shadow-3xl rounded-xl relative overflow-hidden w-[768px] max-w-full md:min-h-[480px] min-h-[800px] ${
-					isSignIn ? "right-panel-active" : ""
+					isSignInForm ? "right-panel-active" : ""
 				}`}
 			>
 				<div className="absolute top-0 md:h-full h-[50%] transition-all duration-[1s] ease-in-out sign-up-container left-0 w-full md:w-[50%]">
