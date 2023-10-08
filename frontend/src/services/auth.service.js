@@ -10,7 +10,7 @@ const BASE_URL = "http://localhost:4500/auth";
  * errorMessage: string
  */
 
-const baseModel = { isOk: false, data: null, erroMessage: null };
+const baseModel = { isOk: false, data: null, errorMessage: null };
 
 
 const login = async (username, password) => {
@@ -18,7 +18,7 @@ const login = async (username, password) => {
 		const response = await apiService.POST(`${BASE_URL}/login`, { username, password });
 		const data = await response.json();
 		if(!response.ok)
-			return { ...baseModel, erroMessage: data.message };
+			return { ...baseModel, errorMessage: data.message };
 
 		return { ...baseModel, isOk: response.ok, data }
 	} catch (error) {
