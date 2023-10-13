@@ -1,5 +1,5 @@
 # InventoryX
-> **DEPRECATED**: This repo has been slited in two repos
+> **ARCHIVED**: This repo has been slited in two repos
 > [Frontend](https://github.com/omargtdev/InventoryX-Front) and [Backend](https://github.com/omargtdev/InventoryX-Back).
 > Don't make/push changes here, will not be reviewed.
  
